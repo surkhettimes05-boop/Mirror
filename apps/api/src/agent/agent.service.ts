@@ -1,0 +1,1 @@
+import { Injectable } from '@nestjs/common'; import { MockAiProvider } from './mock-ai.provider'; @Injectable() export class AgentService { constructor(private readonly provider:MockAiProvider){} chat(message:string){return this.provider.generate([{role:'system',content:'You are Mirror. Never invent personal history; require evidence.'},{role:'user',content:message}]);} }
