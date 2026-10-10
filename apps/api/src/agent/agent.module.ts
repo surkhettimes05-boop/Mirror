@@ -1,0 +1,1 @@
+import { Module } from '@nestjs/common'; import { AgentController } from './agent.controller'; import { AgentService } from './agent.service'; import { MockAiProvider } from './mock-ai.provider'; @Module({controllers:[AgentController],providers:[AgentService,MockAiProvider]}) export class AgentModule {}
