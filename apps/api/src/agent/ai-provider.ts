@@ -1,0 +1,1 @@
+export type AgentMessage={role:'system'|'user'|'assistant';content:string}; export type AgentReply={content:string;provider:string;model:string}; export interface AiProvider { generate(messages:AgentMessage[]):Promise<AgentReply>; }
