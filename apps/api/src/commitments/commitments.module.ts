@@ -1,0 +1,1 @@
+import{Module}from'@nestjs/common';import{PrismaService}from'../prisma.service';import{CommitmentsService}from'./commitments.service';import{CommitmentsController}from'./commitments.controller';@Module({controllers:[CommitmentsController],providers:[CommitmentsService,PrismaService],exports:[CommitmentsService]})export class CommitmentsModule{}
