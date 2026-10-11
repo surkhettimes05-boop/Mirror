@@ -1,0 +1,1 @@
+import{Controller,Get,Param,Query}from'@nestjs/common';import{WhyService}from'./why.service';@Controller('why')export class WhyController{constructor(private why:WhyService){}@Get('pattern/:id')pattern(@Param('id')id:string,@Query('userId')u:string){return this.why.pattern(u,id)}}
