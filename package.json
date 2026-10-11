@@ -1,1 +1,16 @@
-{"name":"mirror","private":true,"scripts":{"dev":"npm --workspace apps/api run start:dev","build":"npm --workspace apps/api run build","prisma:generate":"npm --workspace apps/api run prisma:generate","prisma:validate":"npm --workspace apps/api run prisma:validate"},"workspaces":["apps/*"]}
+{
+  "name": "mirror",
+  "private": true,
+  "scripts": {
+    "dev": "npm --workspace apps/api run start:dev",
+    "build": "npm --workspace apps/api run build",
+    "prisma:generate": "npm --workspace apps/api run prisma:generate",
+    "prisma:validate": "npm --workspace apps/api run prisma:validate"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": "22.x"
+  }
+}
