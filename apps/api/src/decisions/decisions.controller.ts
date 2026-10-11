@@ -1,0 +1,1 @@
+import{Body,Controller,Get,Post,Query}from'@nestjs/common';import{DecisionsService}from'./decisions.service';@Controller('decisions')export class DecisionsController{constructor(private s:DecisionsService){}@Post()create(@Body()b:any){return this.s.create(b)}@Get()list(@Query('userId')u:string){return this.s.list(u)}}
