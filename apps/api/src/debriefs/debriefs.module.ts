@@ -1,0 +1,1 @@
+import { Module } from '@nestjs/common';import { PrismaService } from '../prisma.service';import { DebriefsController } from './debriefs.controller';import { DebriefsService } from './debriefs.service';@Module({controllers:[DebriefsController],providers:[PrismaService,DebriefsService],exports:[DebriefsService]})export class DebriefsModule{}
