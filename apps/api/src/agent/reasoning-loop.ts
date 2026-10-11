@@ -27,7 +27,8 @@ export class ReasoningLoop{
    messages.push(result.message);
    const calls=result.message.tool_calls??[];
    if(!calls.length)return{reply:{content:result.message.content??'',provider:result.provider,model:result.model},trace:{retrieved,toolsExecuted:trace,provider:result.provider,steps:step+1}};
-   for(const call of calls.slice(0,3)){
+   if(calls.length>3)return{reply:{content:'Too many tool calls requested; no further tools were executed.',provider:'runtime',model:'none'},trace:{retrieved,toolsExecuted:trace,stopped:'TOO_MANY_TOOL_CALLS'}};
+   for(const call of calls){
     let args:Record<string,unknown>={};
     try{args=JSON.parse(call.function.arguments||'{}');if(!args||Array.isArray(args)||typeof args!=='object')throw Error('Invalid args');}catch{args={};}
     const name=call.function.name;
