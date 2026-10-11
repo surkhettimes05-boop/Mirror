@@ -1,0 +1,1 @@
+import{Controller,Get,Query}from'@nestjs/common';import{MemoryService}from'./memory.service';@Controller('memory')export class MemoryController{constructor(private memory:MemoryService){}@Get('search')search(@Query('userId')u:string,@Query('q')q=''){return this.memory.retrieve(u,q)}@Get('context')context(@Query('userId')u:string){return this.memory.context(u)}}
