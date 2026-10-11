@@ -7,7 +7,7 @@
     "start": "node dist/main.js",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
-    "start:prod": "prisma migrate deploy && node dist/main.js",
+    "start:prod": "prisma migrate deploy && prisma db seed && node dist/main.js",
     "migrate:deploy": "prisma migrate deploy",
     "seed": "prisma db seed",
     "bootstrap": "prisma migrate deploy && prisma db seed"
