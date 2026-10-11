@@ -10,9 +10,10 @@ import { DecisionsModule } from './decisions/decisions.module';
 import { CommitmentsModule } from './commitments/commitments.module';
 import { WhyModule } from './why/why.module';
 import { CaptureModule } from './capture/capture.module';
+import { DebriefsModule } from './debriefs/debriefs.module';
 
 @Module({
-  imports: [EntriesModule, MemoryModule, EvidenceModule, DecisionsModule, CommitmentsModule, WhyModule, CaptureModule, AgentModule],
+  imports: [EntriesModule, MemoryModule, EvidenceModule, DecisionsModule, CommitmentsModule, WhyModule, CaptureModule, DebriefsModule, AgentModule],
   controllers: [UiController, HealthController],
   providers: [PrismaService],
 })
