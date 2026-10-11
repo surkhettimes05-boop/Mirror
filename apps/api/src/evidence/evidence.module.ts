@@ -1,0 +1,1 @@
+import{Module}from'@nestjs/common';import{PrismaService}from'../prisma.service';import{EvidenceService}from'./evidence.service';import{EvidenceController}from'./evidence.controller';@Module({controllers:[EvidenceController],providers:[EvidenceService,PrismaService],exports:[EvidenceService]})export class EvidenceModule{}
