@@ -100,7 +100,6 @@ model Decision {
   createdAt       DateTime     @default(now())
   user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   predictions     Prediction[]
-  memoryRecords   MemoryRecord[]
 }
 
 model Prediction {
