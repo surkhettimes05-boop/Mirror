@@ -59,6 +59,7 @@ model User {
   patterns     Pattern[]
   auditEvents  AuditEvent[]
   memoryCandidates MemoryCandidate[]
+  debriefs     Debrief[]
 }
 
 model Entry {
@@ -71,6 +72,7 @@ model Entry {
   evidence  Evidence[]
   memoryCandidates MemoryCandidate[]
   memoryRecords MemoryRecord[]
+  debriefs Debrief[]
 
   @@index([userId, createdAt])
 }
@@ -238,4 +240,36 @@ model MemoryRecord {
 
   @@index([userId, kind, status])
   @@index([sourceEntryId])
+}
+
+enum DebriefTargetKind {
+  COMMITMENT
+  PREDICTION
+  DECISION
+}
+
+enum DebriefResult {
+  SUCCEEDED
+  PARTIAL
+  FAILED
+  INVALIDATED
+  UNKNOWN
+}
+
+model Debrief {
+  id            String            @id @default(cuid())
+  userId        String
+  sourceEntryId String
+  targetKind    DebriefTargetKind
+  targetId      String
+  result        DebriefResult
+  actualOutcome String
+  lesson        String?
+  evidence      String?
+  createdAt     DateTime          @default(now())
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceEntry   Entry             @relation(fields: [sourceEntryId], references: [id], onDelete: Restrict)
+
+  @@index([userId, targetKind, targetId])
+  @@index([userId, createdAt])
 }
