@@ -70,6 +70,7 @@ model Entry {
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   evidence  Evidence[]
   memoryCandidates MemoryCandidate[]
+  memoryRecords MemoryRecord[]
 
   @@index([userId, createdAt])
 }
@@ -99,6 +100,7 @@ model Decision {
   createdAt       DateTime     @default(now())
   user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   predictions     Prediction[]
+  memoryRecords   MemoryRecord[]
 }
 
 model Prediction {
@@ -209,4 +211,32 @@ model MemoryCandidate {
   entry       Entry                 @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
   @@index([userId, status, createdAt])
+}
+
+enum MemoryRecordKind {
+  DECISION
+  COMMITMENT
+  PREDICTION
+}
+
+enum MemoryRecordStatus {
+  ACTIVE
+  SUPERSEDED
+}
+
+model MemoryRecord {
+  id           String             @id @default(cuid())
+  userId       String
+  sourceEntryId String
+  kind         MemoryRecordKind
+  entityId     String
+  canonicalText String
+  status       MemoryRecordStatus @default(ACTIVE)
+  supersededById String?
+  createdAt    DateTime           @default(now())
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceEntry  Entry              @relation(fields: [sourceEntryId], references: [id], onDelete: Restrict)
+
+  @@index([userId, kind, status])
+  @@index([sourceEntryId])
 }
