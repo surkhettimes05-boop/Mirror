@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start:dev": "nest start --watch",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node -e \"require('fs').cpSync('public','dist/public',{recursive:true})\"",
     "start": "node dist/main.js",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
