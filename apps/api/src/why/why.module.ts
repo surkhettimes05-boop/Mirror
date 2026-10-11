@@ -1,0 +1,1 @@
+import{Module}from'@nestjs/common';import{PrismaService}from'../prisma.service';import{WhyService}from'./why.service';import{WhyController}from'./why.controller';@Module({controllers:[WhyController],providers:[WhyService,PrismaService],exports:[WhyService]})export class WhyModule{}
