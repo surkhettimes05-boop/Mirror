@@ -8,7 +8,9 @@
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "start:prod": "prisma migrate deploy && node dist/main.js",
-    "migrate:deploy": "prisma migrate deploy"
+    "migrate:deploy": "prisma migrate deploy",
+    "seed": "prisma db seed",
+    "bootstrap": "prisma migrate deploy && prisma db seed"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
@@ -20,7 +22,8 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "typescript": "^5.7.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
@@ -29,5 +32,8 @@
   },
   "engines": {
     "node": "22.x"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
