@@ -58,6 +58,7 @@ model User {
   evidence     Evidence[]
   patterns     Pattern[]
   auditEvents  AuditEvent[]
+  memoryCandidates MemoryCandidate[]
 }
 
 model Entry {
@@ -68,6 +69,7 @@ model Entry {
   createdAt DateTime    @default(now())
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   evidence  Evidence[]
+  memoryCandidates MemoryCandidate[]
 
   @@index([userId, createdAt])
 }
@@ -179,4 +181,32 @@ model AuditEvent {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
+}
+
+enum MemoryCandidateKind {
+  DECISION
+  COMMITMENT
+  PREDICTION
+}
+
+enum MemoryCandidateStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model MemoryCandidate {
+  id          String                @id @default(cuid())
+  userId      String
+  entryId     String
+  kind        MemoryCandidateKind
+  payload     Json
+  rationale   String?
+  status      MemoryCandidateStatus @default(PENDING)
+  createdAt   DateTime              @default(now())
+  resolvedAt  DateTime?
+  user        User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  entry       Entry                 @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status, createdAt])
 }
