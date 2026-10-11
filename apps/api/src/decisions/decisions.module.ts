@@ -1,0 +1,1 @@
+import{Module}from'@nestjs/common';import{PrismaService}from'../prisma.service';import{DecisionsService}from'./decisions.service';import{DecisionsController}from'./decisions.controller';@Module({controllers:[DecisionsController],providers:[DecisionsService,PrismaService],exports:[DecisionsService]})export class DecisionsModule{}
